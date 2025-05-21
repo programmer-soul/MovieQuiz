@@ -23,7 +23,9 @@ struct QuizResultsViewModel {
 // MARK: - View Controller
 
 final class MovieQuizViewController: UIViewController {
+    @IBOutlet weak var noButton: UIButton!
     
+    @IBOutlet weak var yesButton: UIButton!
     // MARK: - UI
 
     @IBOutlet private var imageView: UIImageView!
@@ -70,6 +72,8 @@ final class MovieQuizViewController: UIViewController {
     // MARK: - Logic Methods
 
     private func handleAnswer(givenAnswer: Bool) {
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
         let currentQuestion = questions[currentQuestionIndex]
         let isCorrect = givenAnswer == currentQuestion.correctAnswer
         showAnswerResult(isCorrect: isCorrect)
@@ -133,6 +137,8 @@ final class MovieQuizViewController: UIViewController {
             let viewModel = convert(model: nextQuestion)
             show(quiz: viewModel)
         }
+        yesButton.isEnabled = true
+        noButton.isEnabled = true
     }
 
     // MARK: - Helpers
